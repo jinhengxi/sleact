@@ -9,8 +9,7 @@ import axios from 'axios';
 import useSWR from 'swr';
 
 const LogIn = () => {
-  const { data, error, revalidate } = useSWR('/api/users', fetcher);
-  // const { data, error, revalidate, mutate } = useSWR('/api/users', fetcher);
+  const { data, error, mutate } = useSWR('http://localhost:3095/api/users', fetcher);
 
   const [logInError, setLogInError] = useState(false);
   const [email, onChangeEmail] = useInput('');
@@ -21,14 +20,14 @@ const LogIn = () => {
       setLogInError(false);
       axios
         .post(
-          '/api/users/login',
+          'http://localhost:3095/api/users/login',
           { email, password },
           {
             withCredentials: true,
           },
         )
         .then((response) => {
-          revalidate();
+          mutate(response.data, false);
         })
         .catch((error) => {
           setLogInError(error.response?.data?.statusCode === 401);
@@ -41,7 +40,7 @@ const LogIn = () => {
     return <div>로딩중...</div>;
   }
   if (data) {
-    return <Redirect to="/workspace/sleact/channel" />;
+    return <Redirect to="/workspace/channel" />;
   }
   //   console.log(error, userData);
   //   if (!error && userData) {

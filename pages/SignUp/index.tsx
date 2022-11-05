@@ -9,7 +9,7 @@ import { Link, Redirect } from 'react-router-dom';
 import fetcher from '@utils/fetcher';
 
 const SignUp = () => {
-  const { data, error, revalidate } = useSWR('/api/users', fetcher);
+  const { data } = useSWR('http://localhost:3095/api/users', fetcher);
 
   const [email, onChangeEmail] = useInput('');
   const [nickname, onChangeNickname] = useInput('');
@@ -43,7 +43,7 @@ const SignUp = () => {
         setSignUpError('');
         setSignUpSuccess(false);
         axios
-          .post('/api/users', {
+          .post('http://localhost:3095/api/users', {
             email,
             nickname,
             password,
@@ -66,7 +66,7 @@ const SignUp = () => {
     return <div>로딩중...</div>;
   }
   if (data) {
-    return <Redirect to="/workspace/sleact/channel" />;
+    return <Redirect to="/workspace/channel" />;
   }
   return (
     <div id="container">
