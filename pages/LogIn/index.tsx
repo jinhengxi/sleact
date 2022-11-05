@@ -1,13 +1,14 @@
 import useInput from '@hooks/useInput';
 import { Success, Form, Error, Label, Input, LinkContainer, Button, Header } from '@pages/SignUp/styles';
-// import fetcher from '@utils/fetcher';
+import fetcher from '@utils/fetcher';
 import axios from 'axios';
 import React, { useCallback, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-// import useSWR from 'swr';
+import useSWR from 'swr';
 
 const LogIn = () => {
-//   const { data, error, revalidate, mutate } = useSWR('/api/users', fetcher);
+  const { data, error, revalidate } = useSWR('https://loalhost:3095/api/users', fetcher);
+  // const { data, error, revalidate, mutate } = useSWR('/api/users', fetcher);
 
   const [logInError, setLogInError] = useState(false);
   const [email, onChangeEmail] = useInput('');
@@ -25,7 +26,7 @@ const LogIn = () => {
           },
         )
         .then((response) => {
-        //   revalidate();
+            revalidate();
         })
         .catch((error) => {
           setLogInError(error.response?.data?.statusCode === 401);
@@ -34,13 +35,13 @@ const LogIn = () => {
     [email, password],
   );
 
-//   if (data === undefined) {
-//     return <div>로딩중...</div>;
-//   }
+  //   if (data === undefined) {
+  //     return <div>로딩중...</div>;
+  //   }
 
-//   if (data) {
-//     return <Redirect to="/workspace/sleact/channel/일반" />;
-//   }
+  //   if (data) {
+  //     return <Redirect to="/workspace/sleact/channel/일반" />;
+  //   }
 
   // console.log(error, userData);
   // if (!error && userData) {
