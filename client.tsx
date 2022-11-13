@@ -7,7 +7,7 @@ import 'regenerator-runtime/runtime';
 
 import axios from 'axios';
 
-import App from './layouts/App';
+import App from './layouts/App/App';
 
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL =

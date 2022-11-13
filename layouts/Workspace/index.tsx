@@ -59,9 +59,8 @@ const Workspace: FC = ({ children }) => {
           <WorkspaceName>Sleact</WorkspaceName>
           <MenuScroll>MenuScroll</MenuScroll>
         </Channels>
-        <Chats>Chats</Chats>
+        <Chats>{children}</Chats>
       </WorkspaceWrapper>
-      {children}
     </div>
   );
 };
