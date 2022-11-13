@@ -5,6 +5,8 @@ import axios from 'axios';
 import useSWR from 'swr';
 import { Redirect } from 'react-router';
 
+import gravatar from 'gravatar';
+
 import {
   AddButton,
   Channels,
@@ -46,11 +48,19 @@ const Workspace: FC = ({ children }) => {
       <Header>
         <RightMenu>
           <span>
-            <ProfileImg src="" alt={data.nickname} />
+            <ProfileImg src={gravatar.url(data.email, { s: '28px', d: 'retro' })} alt={data.nickname} />
           </span>
         </RightMenu>
       </Header>
       <button onClick={onLogout}>로그아웃</button>
+      <WorkspaceWrapper>
+        <Workspaces>test</Workspaces>
+        <Channels>
+          <WorkspaceName>Sleact</WorkspaceName>
+          <MenuScroll>MenuScroll</MenuScroll>
+        </Channels>
+        <Chats>Chats</Chats>
+      </WorkspaceWrapper>
       {children}
     </div>
   );
